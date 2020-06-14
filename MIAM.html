@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
   <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <title> MIAM : Merveilleux et Imaginatif générateur Aléatoire de Menus</title>
     <style>
 html {
@@ -76,6 +78,25 @@ hr {
 	margin-top: 5px;
 	margin-bottom: 5px;
 }
+
+#results {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  border-collapse: collapse;
+}
+
+#results th {
+  padding: 5px 5px;
+  margin: 0;
+  border: 1px double #FFFFFF;
+}
+
+#results td {
+  padding: 5px 5px;
+  border: 1px solid #FFFFFF;
+}
     </style>
   </head>
   <body>
@@ -83,18 +104,258 @@ hr {
     Bienvenue sur le Merveilleux et Imaginatif générateur Aléatoire de Menus (MIAM)
     <hr />
     </header>
+        <script type="text/javascript">
+      function choose(array) {
+			  return array[Math.floor(Math.random() * (array.length))];
+		  }
 
+      var entree = new Array(
+        "tomate",
+        "concombre",
+        "salade",
+        "maïs",
+        "carottes",
+        "salade d'endives (noix + fromage)",
+        "bettraves rouges",
+        "poireaux vinaigrette"
+      );
+
+      var plat_unique = new Array(
+        "hamburgers et salade",
+        "salade de riz",
+        "salade de pâtes",
+        "crêpes salées + salade",
+        "salade composée maïs / oeufs / tomates",
+        "rouleaux de printemps + salade"
+      );
+
+      var feculent = new Array(
+        "pâtes",
+        "riz",
+        "blé",
+        "semoule",
+        "purée",
+        "lentilles",
+        "pommes de terre",
+      );
+
+      var big_feculent = new Array(
+        "raviolles",
+        "raviolis",
+        "spaghetti bolognaise",
+        "pâtes carbonara"
+      );
+
+      var legumes = new Array(
+        "ratatouille",
+        "poireaux",
+        "petits pois carrotes",
+        "chou",
+        "chou fleur",
+        "brocoli",
+        "carottes",
+        "haricots verts",
+        "flageolet"
+      );
+
+      var sauce = new Array(
+        "crème",
+        "poivrons",
+        "oignons",
+        "champignons",
+        "oignons frais",
+        "gruyère",
+      );
+
+      var viande = new Array (
+        "saucisse",
+        "oeufs durs",
+        "omelette",
+        "quenelles",
+        "poisson selon disponibilité",
+        "cuisses de poulet",
+        "lanières de porc",
+        "lanière de boeuf",
+        "pâté",
+        "saucisson",
+        "jambon"
+      );
+
+      var dessert = new Array(
+        "quatre-quart",
+        "madeleine",
+        "cookies",
+        "crème dessert",
+        "gateau chocolat",
+        "brioche",
+        "flan",
+        "compote",
+        "pancakes",
+        "crêpes",
+        "yahourt",
+        "fromage"
+      );
+
+      var gouter = new Array(
+        "madeleines",
+        "cookies",
+        "chocolat",
+        "speculos"
+      );
+
+      // Sauce:
+      //  2 ingrédients aléatoires
+      function getSauce() {
+        var ing1 = choose(sauce);
+        var ing2;
+        do {
+          ing2 = choose(sauce);
+        } while (ing1 == ing2);
+        return ("sauce: " + ing1 + " et " + ing2);
+      };
+
+      // Structures repas midi:
+      //  1) Plat unique
+      //  2) Entrée + feculent + sauce + dessert
+      //  3) Entrée + feculent + viande + dessert
+      //  4) Feculent + sauce + légume + dessert
+      //  5) Feculent + viande + légume + dessert
+      //  6) Entrée + Big Feculent + legume
+      function getRepasMidi() {
+        var choice = Math.floor(Math.random() * 6);
+
+        var r_plat_unique = choose(plat_unique);
+        var r_entree = choose(entree);
+        var r_feculent = choose(feculent);
+        var r_bigfeculent = choose(big_feculent);
+        var r_sauce = getSauce();
+        var r_viande = choose(viande);
+        var r_legume = choose(legumes);
+        var r_dessert = choose(dessert);
+        var fruit = " et fruits";
+        switch (choice) {
+          case 0:
+            return r_plat_unique + fruit;
+            break;
+
+          case 1:
+            return r_entree + ", " + r_feculent + " (" + r_sauce + "), " + r_dessert + fruit;
+            break;
+
+          case 2:
+            return r_entree + ", " + r_feculent + ", " + r_viande + ", " + r_dessert + fruit;
+            break;
+
+          case 3:
+            return r_feculent + " (" + r_sauce + "), " + r_legume + ", " + r_dessert + fruit;
+            break;
+
+          case 4:
+            return r_feculent + ", " + r_viande + ", " + r_dessert + fruit;
+            break;
+
+          case 5:
+            return r_entree + ", " + r_bigfeculent + ", " + r_dessert + fruit;
+            break;
+        }
+      };
+
+      // Structure goûter:
+      //  1) Gouter
+      //  2) Dessert
+      function getGouter() {
+        if (Math.random()<0.5) {
+          return (choose(dessert) + ", fruits");
+        } else {
+          return (choose(gouter) + ", fruits");
+        }
+      };
+
+      // Structure repas soir:
+      //  1) Plat unique
+      //  2) Entrée + feculent + sauce
+      //  3) Entrée + feculent
+      //  4) Feculent + sauce + légume
+      //  5) Feculent + légume
+      //  6) Entrée + Big Feculent + legume
+      function getRepasSoir() {
+        var choice = Math.floor(Math.random() * 6);
+
+        var r_plat_unique = choose(plat_unique);
+        var r_entree = choose(entree);
+        var r_feculent = choose(feculent);
+        var r_bigfeculent = choose(big_feculent);
+        var r_sauce = getSauce();
+        var r_viande = choose(viande);
+        var r_legume = choose(legumes);
+        var r_dessert = choose(dessert);
+        var fruit = " et fruits";
+        switch (choice) {
+          case 0:
+            return r_plat_unique + fruit;
+            break;
+
+          case 1:
+            return r_entree + ", " + r_feculent + " (" + r_sauce + "), " + r_dessert + fruit;
+            break;
+
+          case 2:
+            return r_entree + ", " + r_feculent + ", " + r_dessert + fruit;
+            break;
+
+          case 3:
+            return r_feculent + " (" + r_sauce + "), " + r_legume + ", " + r_dessert + fruit;
+            break;
+
+          case 4:
+            return r_feculent + ", " + r_dessert + fruit;
+            break;
+
+          case 5:
+            return r_entree + ", " + r_bigfeculent + ", " + r_dessert + fruit;
+            break;
+
+        }
+      };
+
+      function set_menus() {
+        document.getElementById("results").innerHTML = `
+          <tbody>
+            <tr>
+              <th style="width:225px;">Midi</th>
+              <th style="width:100px;">Goûter</th>
+              <th style="width:225px;">Soir</th>
+            </tr>`
+        var num = document.getElementById("nb_menus").value;
+        for (var i =0; i<num; i++) {
+          document.getElementById("results").innerHTML += `
+            <tr>
+              <td>${getRepasMidi()}</td>
+              <td>${getGouter()}</td>
+              <td>${getRepasSoir()}</td>
+            </tr>`
+        }
+        document.getElementById("results").innerHTML += "</tbody>"
+      };
+    </script>
     <div id="inner-wrapper">
       <div id="inner">
-        <p>
-        Je suis en retard sur ma liste de menus, il me faut absolument <input type="number" step="1" value="1" id="nb_menus"> menu(s), de suite !
-        </p>
-        <button onclick="gen_menus()">Générer !</button>
+        <form action="javascript:void(0);" onsubmit="set_menus()">
+          <p>
+            Je suis en retard sur ma liste de menus, il me faut absolument <input type="number" step="1" value="1" min="1" id="nb_menus" onenter="set_menus()"> menu(s), de suite !
+          </p>
+          <button type="submit">Générer !</button>
+        </form>
+
+        <table id="results">
+        </table>
+
       </div>
     </div>
     <footer>
       <hr />
-      Ce travail est libre de droit selon les termes de la Do What The Fuck You Want Public License, Version 2. Merci de signaler tout bug ou correctif via le <a href="https://github.com/NicolasDerumigny/MIAM">dépot officiel</a> ou <a href="mailto:nderumigny@gmail.com">par mail</a>.
+      Ce travail est libre de droits selon les termes de la Do What The Fuck You Want Public License, Version 2. Merci de signaler tout bug ou correctif via le <a href="https://github.com/NicolasDerumigny/MIAM">dépot officiel</a> ou <a href="mailto:nderumigny@gmail.com">par mail</a>.
     </footer>
+
   </body>
 </html>
