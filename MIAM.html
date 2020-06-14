@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <title> MIAM : Merveilleux et Imaginatif générateur Aléatoire de Menus</title>
+    <style>
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: table;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  background-color: #333;
+  font-family:sans-serif;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%
+}
+
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+header {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width:100%;
+  font-size: 2em;
+}
+
+#inner-wrapper {
+  height: 100%;
+  display: table-row;
+}
+
+#inner {
+  display: table-cell;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 768px;
+}
+
+p input {
+  display: inline;
+  width: 50px;
+}
+
+footer {
+  display: block;
+  max-width: 768px;
+  margin-left : auto;
+  margin-right : auto;
+  margin-top: 10px;
+  padding: 0 20px;
+  margin-bottom: 5px;
+  text-align: center;
+  font-style: italic;
+}
+
+hr {
+  border: 0;
+	max-width: 768px;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+    Bienvenue sur le Merveilleux et Imaginatif générateur Aléatoire de Menus (MIAM)
+    <hr />
+    </header>
+
+    <div id="inner-wrapper">
+      <div id="inner">
+        <p>
+        Je suis en retard sur ma liste de menus, il me faut absolument <input type="number" step="1" value="1" id="nb_menus"> menu(s), de suite !
+        </p>
+        <button onclick="gen_menus()">Générer !</button>
+      </div>
+    </div>
+    <footer>
+      <hr />
+      Ce travail est libre de droit selon les termes de la Do What The Fuck You Want Public License, Version 2. Merci de signaler tout bug ou correctif via le <a href="https://github.com/NicolasDerumigny/MIAM">dépot officiel</a> ou <a href="mailto:nderumigny@gmail.com">par mail</a>.
+    </footer>
+  </body>
+</html>
